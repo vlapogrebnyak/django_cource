@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список файлов</title>
+</head>
+<body>
+    <h1>Список файлов в текущей директории</h1>
+    {% for file in files %}
+        <div>{{ file }}</div>
+    {% endfor %}
+</body>
+</html>
