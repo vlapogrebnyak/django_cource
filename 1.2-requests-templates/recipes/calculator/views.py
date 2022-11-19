@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 DATA = {
@@ -28,3 +29,16 @@ DATA = {
 #     'ингредиент2': количество2,
 #   }
 # }
+
+def get_receipt(request, dish):
+    if dish not in DATA:
+        return HttpResponse(f"Recipe for {dish} not found")
+    dish_receipt = DATA[dish].copy()
+    servings = int(request.GET.get("servings", 1))
+    if servings > 1:
+        for item in dish_receipt:
+            dish_receipt[item] *= servings
+    context = {
+        'recipe' : dish_receipt
+    }
+    return render(request, 'calculator/index.html', context)
